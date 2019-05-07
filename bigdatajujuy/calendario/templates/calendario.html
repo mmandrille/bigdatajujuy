@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="eventos">
+        {% if eventos %}
+            <h1>Calendario para hoy: {{ hoy }} </h1>
+            <hr>
+            <ul>
+                {% for evento in eventos %}
+                <li>
+                    <div class="foto">
+                        <img src="/archivos/{{ evento.portada }}">
+                    </div>
+                    <div class="info">
+                        <h2>{{ evento.nombre }}</h2>
+                        <p>Hora: {{ evento.fecha_inicio|date:"H:i" }} hasta {{ evento.fecha_fin|date:"H:i" }}</p>                    
+                        <p>{{ evento.descripcion|safe }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if importantes %}
+        <hr>
+        <h2> Destacados </h2>
+        <ul>
+            {% for importante in importantes %}
+            <li>
+                <div class="foto">
+                    <img src="/archivos/{{ importante.portada }}">
+                </div>
+                <div class="info">
+                    <h2>{{ importante.nombre }}</h2> 
+                    <p>Fecha: {{ importante.fecha_inicio.date }}</p>
+                    <p>Hora: {{ importante.fecha_inicio|date:"H:i" }} hasta {{ importante.fecha_fin|date:"H:i" }}</p>
+                    <p>{{ importante.descripcion|safe }}</p>
+                </div>
+            </li>
+            {% endfor %}       
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}

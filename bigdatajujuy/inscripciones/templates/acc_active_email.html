@@ -1,0 +1,9 @@
+{% autoescape off %}
+Bienvenido {{ inscripto.nombres }} {{ inscripto.apellido }},
+Dni: {{ inscripto.num_doc }}
+Teléfono: {{ inscripto.telefono }}
+Por favor ingresa a este link para confirmar tu inscripción a Jujuy Big Data Summit 2019,
+Que se realizará en San Salvador de Jujuy:
+http://bigdata.jujuydigital.com.ar/inscribir/activate/{{inscripto.pk}}/{{token}}
+A través de este correo, recibirás las notificaciones y noticias importantes del evento.
+{% endautoescape %}

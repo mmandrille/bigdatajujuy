@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body>
+    {% for tipo in tipo_usuario %}
+      {% if tipo %}
+        <h2><b>Inscriptos Validados</b></h2>
+      {% else %}
+        <hr>
+        <h2><b>Inscriptos sin Validar</b></h2>
+      {%endif%}
+      <table style="width:100%">
+        <tr>
+            <th>Nombre y Apellido</th>
+            <th>Documento</th>
+            <th>Telefono</th>
+            <th>Correo Electronico</th>
+        </tr>      
+      {%for inscripto in inscriptos %}
+        {% if tipo == inscripto.activo %}
+          <tr>
+            <th>{{inscripto.apellido}}, {{inscripto.nombres}}</th>
+            <th>{{inscripto.num_doc}}</th>
+            <th>{{inscripto.telefono}}</th>
+            <th>{{inscripto.email}}</th>
+          </tr>
+        {%endif%}
+      {%endfor%}
+      </table>
+    {%endfor%}
+
+  </body>
+</html>

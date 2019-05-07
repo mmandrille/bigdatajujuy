@@ -1,0 +1,33 @@
+{% load static %}
+{% block content %}
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}BIG DATA Jujuy{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <style type="text/css">
+      @font-face {
+        font-family: Archia;
+        font-weight: normal;
+        src: url({% static 'fonts/Archia-Regular.otf' %}) format('truetype');
+        src: local({% static 'fonts/Archia-Regular.otf' %}) format('truetype');
+     }
+      @font-face {
+        font-family: Archia;
+        font-weight: bold;
+        src: url({% static 'fonts/Archia-Bold.otf' %}) format('truetype');
+        src: local({% static 'fonts/Archia-Bold.otf' %}) format('truetype');
+     }
+      @font-face {
+        font-family: Archia;
+        font-weight: lighter;
+        src: url({% static 'fonts/Archia-Thin.otf' %}) format('truetype');
+        src: local({% static 'fonts/Archia-Thin.otf' %}) format('truetype');
+     }
+    </style>
+  </head>
+{% endblock %}

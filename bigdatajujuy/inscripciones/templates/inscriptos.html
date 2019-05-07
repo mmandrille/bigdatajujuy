@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Resultado{% endblock %}
+
+{% block content %}
+  <div class="linea_inscripto">
+    <div class="linea_nombre">
+      <h1><b>Listado de Incriptos</b></h1>
+    </div>
+    <div class="linea_telefono">
+      <a href="tabla">Ver en tabla simple</a>
+    </div>
+    <div class="linea_email">
+      <a href="download_excel">Descargar Excel</a>
+    </div>
+  </div>
+  <div class="inscriptos">
+    {% for tipo in tipo_usuario %}
+      {% if tipo %}
+        <h2><b>Inscriptos Validados</b></h2>
+      {% else %}
+        <hr>
+        <h2><b>Inscriptos sin Validar</b></h2>
+      {%endif%}
+      <ul class="list-unstyled">
+        <li>
+          <div class="linea_inscripto">
+            <div class="linea_relleno"></div>
+            <div class="linea_nombre">
+              <b>Nombre y Apellido</b>
+            </div>
+            <div class="linea_documento">
+              <b>Documento</b>
+            </div>
+            <div class="linea_telefono">
+              <b>Telefono</b>
+            </div>
+            <div class="linea_email">
+              <b>Correo Electronico</b>
+            </div>
+            <div class="linea_relleno"></div>
+          </div>
+        </li>      
+      {%for inscripto in inscriptos %}
+        {% if tipo == inscripto.activo %}
+          <li>
+            <div class="linea_inscripto">
+              <div class="linea_relleno"></div>
+              <div class="linea_nombre">
+                {{inscripto.apellido}}, {{inscripto.nombres}}
+              </div>
+              <div class="linea_documento">
+                {{inscripto.num_doc}}
+              </div>
+              <div class="linea_telefono">
+                {{inscripto.telefono}}
+              </div>
+              <div class="linea_email">
+                {{inscripto.email}}
+              </div>
+              <div class="linea_relleno"></div>
+            </div>
+          </li>
+        {%endif%}
+      {%endfor%}
+      </ul>
+    {%endfor%}
+  </div>
+{% endblock %}

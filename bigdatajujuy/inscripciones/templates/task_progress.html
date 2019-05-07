@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+ 
+{% block title %}Progreso Tarea{% endblock %}
+
+{% block content %}
+<section class="progreso">
+    <div class="progreso-container">
+        <h2>Progresso de la tarea: {{ tarea_queue }}</h2>
+        <p> Tareas en Cola: {{ tareas_en_cola }} </p>
+        <p> Tareas Finalizadas: {{ tareas_terminadas }} </p>
+        <progress class="barra" value="{{ tareas_terminadas }}" max="{{ tareas_totales }}"></progress>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% load static %}
+{% block content %}
+      <footer>
+      <br>
+        <div class="social">
+          <a href="https://www.facebook.com/infraestructurajujuy/?ref=br_rs">
+            <span class="icon icon-facebook"></span>
+          </a>
+          <a href="https://twitter.com/infrajujuy">
+            <span class="icon icon-twitter"></span>
+          </a>
+          <a href="https://www.youtube.com/channel/UCjQK598kmkTyNYZ4SONWiGw">
+            <span class="icon icon-youtube"></span>
+          </a>
+          <a href="https://www.instagram.com/infraestructurajujuy/?hl=es-la">
+            <span class="icon icon-instagram"></span>
+          </a>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-9 col-md-offset-1">
+
+          </div>
+          <div class="col-md-2">
+            <img src="{% static 'img/logo2.png' %}" class="logo" style="margin-top: 10px"/>
+          </div>
+        </div>
+      </footer>
+    {% load static %}
+    
+    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lightbox.js' %}"></script>
+{% endblock %}
