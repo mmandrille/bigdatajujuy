@@ -18,7 +18,7 @@ class Faq(models.Model):
         return self.pregunta
 
 class Conferencias(models.Model):
-    expositor = models.ForeignKey(Inscriptos, on_delete=models.CASCADE)
+    expositor = models.ForeignKey(Inscriptos, on_delete=models.CASCADE, related_name='conferencias')
     titulo = models.CharField('Titulo', max_length=200)
     descripcion = HTMLField()
     archivo = models.FileField('Archivo de Presentacion', storage=FileSystemStorage(location=MEDIA_URL), blank=True, null=True)

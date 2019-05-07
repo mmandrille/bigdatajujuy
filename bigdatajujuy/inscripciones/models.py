@@ -30,8 +30,8 @@ class Inscriptos(models.Model):
     num_doc = models.CharField('Numero de Documento', max_length=50)
     telefono = models.CharField('Telefono', max_length=20)
     email = models.EmailField('Correo Electronico Personal')
-    activo = models.BooleanField('Mail Validado', default=False)
-    autorizado = models.BooleanField('Expositor Autorizado', default=False)
+    activo = models.BooleanField('Email Validado', default=False)
+    autorizado = models.BooleanField('Autorizado como Expositor', default=False)
     def __str__(self):
         return(self.nombres + ' ' + self.apellido + " (" + self.get_categoria_display() + ")")
 

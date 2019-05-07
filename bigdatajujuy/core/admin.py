@@ -8,8 +8,9 @@ from inscripciones.models import Inscriptos
 class ConferenciasAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "expositor":
-            kwargs["queryset"] = Inscriptos.objects.filter(categoria=2)
+            kwargs["queryset"] = Inscriptos.objects.filter(categoria=2, autorizado=True)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    list_filter = ['autorizada']
 
 
 # Register your models here.
