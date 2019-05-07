@@ -1,0 +1,4 @@
+django
+django-tinymce
+pillow
+django-background-tasks
