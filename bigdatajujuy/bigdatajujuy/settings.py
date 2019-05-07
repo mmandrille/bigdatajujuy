@@ -25,7 +25,7 @@ SECRET_KEY = '_dp1os$lxtbke64jtgbkja9edx7^$w%sg)ysxf%pdc3#m1pf)@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'bigdata.jujuy.com.ar',]
+ALLOWED_HOSTS = ['localhost', 'bigdata.jujuydigital.com.ar',]
 
 
 # Application definition
