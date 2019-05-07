@@ -3,19 +3,7 @@
 {% block content %}
     {% load staticfiles%}
     <div class="quees">
-        <h1>¿Que es bigdatajujuy?</h1>
-        <br>
-        <div class="container">
-            <p class="texto-explicativo">
-                {% for t in textos %}
-                    {{ t.texto|safe }}
-                {% endfor %}
-            </p>
-        </div>
-        <hr>
-
         <div class="seccion-preguntas-frecuentes">
-            <h2>Preguntas Frecuentes:</h2>
             <ul class="preguntas-frecuentes">
                 {% for faq in faqs %}
                 <li>

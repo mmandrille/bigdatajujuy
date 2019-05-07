@@ -9,15 +9,13 @@
       <form method="post">
         {% csrf_token %}
         {% for field in form %}
-
-        <div class="input-group">
-          {{ field.label_tag }}<br>
-          {{ field }}
-          {% for error in field.errors %}
-            <p style="color:black">{{ error }}</p>
-          {% endfor %}
-        </div>
-
+          <div class="input-group">
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% for error in field.errors %}
+              <p style="color:black">{{ error }}</p>
+            {% endfor %}
+          </div>
         {% endfor %}
         <button type="submit">Registrarse</button>
       </form>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="eventos">
+        {% if expositores %}
+            <h1>Expositores:</h1>
+            <hr>
+            <ul>
+                {% for expositor in expositores %}
+                <li>
+                    <div class="foto">
+                        <img src="/archivos/{{ expositor.foto }}">
+                    </div>
+                    <div class="info">
+                        <h2>{{ expositor.apellido }}, {{ expositor.nombres }}</h2>
+                        <p>{{ expositor.descripcion|safe }}</p>
+                        AGREGAMOS LISTADO DE CHARLAS
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

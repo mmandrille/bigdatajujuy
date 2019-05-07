@@ -40,7 +40,7 @@ class MensajesAdmin(admin.ModelAdmin):
     actions = [enviar_mail]
 
 class InscriptosAdmin(admin.ModelAdmin):
-    list_filter = ['activo', 'categoria']
+    list_filter = ['activo', 'categoria', 'autorizado']
 
 # Register your models here.
 admin.site.register(Inscriptos, InscriptosAdmin)

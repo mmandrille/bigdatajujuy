@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Carga de Exposiciones{% endblock %}
+{% block content %}
+  <h2>Bienvenido {{inscripto.apellido}}, {{inscripto.nombres}}!</h2>
+  <p>Aqui podra realizar la carga de sus propuestas para Exposiciones</p>
+  <section class="inscripcion">  
+    <div class="inscripcion-container">
+        <form method="post">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="input-group">
+              {{ field.label_tag }}<br>
+              {{ field }}
+              {% for error in field.errors %}
+                <p style="color:black">{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endfor %}
+          <button type="submit">Registrarse</button>
+        </form>
+    </div>
+  </section>
+{% endblock %}

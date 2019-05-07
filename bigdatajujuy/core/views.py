@@ -1,3 +1,4 @@
+#Modulos Standard
 from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -6,8 +7,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 #Agregamos modulos personales
 from .models import Faq, Conferencias
+from .modelforms import ConferenciaForm
 from inscripciones.models import Inscriptos
-from .forms import SignUpForm
 
 def home(request):
     casistentes = Inscriptos.objects.filter(activo=True, categoria=1).count()
@@ -17,26 +18,33 @@ def home(request):
     return render(request, 'home.html', {'casistentes': casistentes, 'cexpositores': cexpositores, 'cconferencias': cconferencias,
                                          'texto_central': texto_central, })
 
+def mostrar_exposiciones(request):
+    conferencias = Conferencias.objects.filter(autorizada=True)
+    return render(request, 'conferencias.html', {'conferencias': conferencias, })
+
+def cargar_exposicion(request, inscripto_id, inscripto_dni):
+    try:
+        inscripto = Inscriptos.objects.get(pk=inscripto_id, num_doc=inscripto_dni, autorizado=True, categoria=2) #Chequeamos si no esta inscripto y autorizado
+        if request.method == 'POST':
+            print(inscripto)
+            form = ConferenciaForm(request.POST)
+            if form.is_valid():#Si el formulario se completo correctamente
+                conferencia = form.save(commit=False)
+                conferencia.expositor = inscripto
+                conferencia.save()
+                return render(request, 'resultado.html', {'texto': 'La conferencia fue Agregada, espere a que sea revisada por la administracion.', })
+        else:
+            form = ConferenciaForm()
+            return render(request, 'cargar_exposicion.html', {'inscripto': inscripto, 'form': form, })
+    except Inscriptos.DoesNotExist: return render(request, 'resultado.html', {'texto': 'Aun no ha sido autorizado por la administracion para cargar Exposiciones.', })
+
+def mostrar_expositores(request):
+    expositores = Inscriptos.objects.filter(categoria=2, autorizado=True)
+    return render(request, 'expositores.html', {'expositores': expositores, })
+
 def contacto(request):
     return render(request, 'contacto.html', { })
 
 def faq(request):
     faqs = Faq.objects.all().order_by('orden')
     return render(request, 'faq.html', {'faqs' : faqs })
-
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('/encuestas/1')
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
-
-def encontrate(request):
-    return render(request, 'encontrate.html', { })

@@ -18,34 +18,43 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 #Import Personales
 from .models import Inscriptos, Mensajes
-from .ModelForm import InscriptoForm_asistente, InscriptoForm_expositor
+from .modelforms import InscriptoForm_asistente, InscriptoForm_expositor
 from .tokens import account_activation_token
 from .tasks import crear_mails, crear_progress_link
 
 def inscripcion(request, tipo):
-    if request.method == 'POST':#Si lleno el formulario
-        print("Recibimos el pedido de inscripcion, es de tipo: " + tipo)
-        if tipo == 'expositor': 
+    if request.method == 'POST':#Si intenta inscribirse
+        if tipo == 'expositor':#Cargamos el objecto form segun tipo de inscripcion
             form = InscriptoForm_expositor(request.POST)
-        else: 
-            form = InscriptoForm_asistente(request.POST)
-        if form.is_valid():
+        else: form = InscriptoForm_asistente(request.POST)
+        
+        if form.is_valid():#Si el formulario se completo correctamente
             to_email = form.cleaned_data.get('email')#Obtenemos el correo
+        
             try: inscripto = Inscriptos.objects.get(email=to_email) #Chequeamos si no esta inscripto    
-            except Inscriptos.DoesNotExist:
-                inscripto = form.save()
-            if not inscripto.activo:
+            except Inscriptos.DoesNotExist:#Si no existe
+                inscripto = form.save()#Creamos el inscripto
+        
+            if not inscripto.activo:#Si el usuario aun no fue activado le vamos a enviar un mail de validacion
                 mail_subject = 'Confirma tu Inscripcion a Big Data Jujuy.'
-                message = render_to_string('acc_active_email.html', {
+                #Definimos el tipo de mail a enviar
+                if tipo == 'expositor': mail_template= 'acc_active_email_exp.html'
+                else: mail_template= 'acc_active_email.html'
+                #Preparamos el correo electronico
+                message = render_to_string(mail_template, {
                     'inscripto': inscripto,
                     'token':account_activation_token.make_token(inscripto),
                 })
+                #Instanciamos el objeto mail con destinatario
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
                 )
+                #Enviamos el correo
                 email.send()
+                #Informamos que el mail fue enviado
                 return render(request, 'resultado.html', {'texto': 'Por Favor Confirme la creacion de su cuenta en el correo que recibio', })
             else:
+                #informamos que la cuenta ya fue activada.
                 return render(request, 'resultado.html', {'texto': 'El mail informado ya fue validado en otra inscripcion', })
             if tipo == 'expositor': inscripto.categoria = 2
             inscripto.save()

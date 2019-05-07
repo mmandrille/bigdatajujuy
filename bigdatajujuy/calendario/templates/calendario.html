@@ -19,11 +19,14 @@
                 </li>
                 {% endfor %}
             </ul>
+            {% if importantes %}
+                <hr>
+            {% endif %}
         {% endif %}
 
         {% if importantes %}
-        <hr>
         <h2> Destacados </h2>
+        <hr>
         <ul>
             {% for importante in importantes %}
             <li>
