@@ -52,7 +52,7 @@ class InscriptoAdmin(admin.ModelAdmin):
     list_filter = ['activo', 'categoria', 'autorizado']
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(InscriptoAdmin, self).get_fieldsets(request, obj)
-        if obj.categoria == 1: remove_from_fieldsets(fieldsets, ('autorizado',))
+        if obj.categoria == 1: remove_from_fieldsets(fieldsets, ('autorizado','descripcion', ))
         return fieldsets
 
 # Register your models here.
