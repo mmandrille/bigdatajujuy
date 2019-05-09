@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 #Import Personales
 from .tasks import enviar_mails, crear_progress_link
-from .models import Inscriptos, Mensajes, Mails, Progress_Links
+from .models import Inscripto, Mensajes, Mails, Progress_Links
 
 #Definimos acciones extras:
 def enviar_mail(modeladmin, request, queryset):    
@@ -12,7 +12,7 @@ def enviar_mail(modeladmin, request, queryset):
         mail_list = list()
         cargar_destinatarios = [lambda:mail_list.append(obj.autor.email), 
                                 lambda:[mail_list.append(u.email) for u in User.objects.all()], 
-                                lambda:[mail_list.append(u.email) for u in Inscriptos.objects.all()],
+                                lambda:[mail_list.append(u.email) for u in Inscripto.objects.all()],
                                 lambda:[mail_list.append(u.email) for u in Mails.objects.filter(valido=True)],
                                 lambda:[mail_list.append(u.email) for u in Mails.objects.all()]]
         cargar_destinatarios[obj.destinatarios]()
@@ -48,15 +48,15 @@ class MensajesAdmin(admin.ModelAdmin):
     ordering = ['nombre']
     actions = [enviar_mail]
 
-class InscriptosAdmin(admin.ModelAdmin):
+class InscriptoAdmin(admin.ModelAdmin):
     list_filter = ['activo', 'categoria', 'autorizado']
     def get_fieldsets(self, request, obj=None):
-        fieldsets = super(InscriptosAdmin, self).get_fieldsets(request, obj)
+        fieldsets = super(InscriptoAdmin, self).get_fieldsets(request, obj)
         if obj.categoria == 1: remove_from_fieldsets(fieldsets, ('autorizado',))
         return fieldsets
 
 # Register your models here.
-admin.site.register(Inscriptos, InscriptosAdmin)
+admin.site.register(Inscripto, InscriptoAdmin)
 admin.site.register(Mensajes, MensajesAdmin)
 admin.site.register(Mails)
 admin.site.register(Progress_Links)

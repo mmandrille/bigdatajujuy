@@ -17,7 +17,7 @@ from background_task.models_completed import CompletedTask as bg_CompletedTask
 from django.contrib.admin.views.decorators import staff_member_required
 
 #Import Personales
-from .models import Inscriptos, Mensajes
+from .models import Inscripto, Mensajes
 from .modelforms import InscriptoForm_asistente, InscriptoForm_expositor
 from .tokens import account_activation_token
 from .tasks import crear_mails, crear_progress_link
@@ -32,8 +32,8 @@ def inscripcion(request):
         if form.is_valid():#Si el formulario se completo correctamente
             to_email = form.cleaned_data.get('email')#Obtenemos el correo
         
-            try: inscripto = Inscriptos.objects.get(email=to_email) #Chequeamos si no esta inscripto    
-            except Inscriptos.DoesNotExist:#Si no existe
+            try: inscripto = Inscripto.objects.get(email=to_email) #Chequeamos si no esta inscripto    
+            except Inscripto.DoesNotExist:#Si no existe
                 inscripto = form.save()#Creamos el inscripto
         
             if not inscripto.activo:#Si el usuario aun no fue activado le vamos a enviar un mail de validacion
@@ -66,8 +66,8 @@ def inscripcion(request):
 
 def activate(request, inscripto_id, token):
     try:
-        inscripto = Inscriptos.objects.get(pk=inscripto_id)
-    except(TypeError, ValueError, OverflowError, Inscriptos.DoesNotExist):
+        inscripto = Inscripto.objects.get(pk=inscripto_id)
+    except(TypeError, ValueError, OverflowError, Inscripto.DoesNotExist):
         inscripto = None
     if inscripto is not None and account_activation_token.check_token(inscripto, token):
         inscripto.activo = True
@@ -83,19 +83,19 @@ def test_mail(request, msj_id):
 @staff_member_required
 def mostrar_inscriptos(request):
     tipo_usuario = [True, False]
-    inscriptos = Inscriptos.objects.all().order_by('-apellido')
+    inscriptos = Inscripto.objects.all().order_by('-apellido')
     return render(request, 'inscriptos.html', {'inscriptos': inscriptos, 'tipo_usuario': tipo_usuario })
 
 @staff_member_required
 def mostrar_tabla_inscriptos(request):
     tipo_usuario = [True, False]
-    inscriptos = Inscriptos.objects.all().order_by('-apellido')
+    inscriptos = Inscripto.objects.all().order_by('-apellido')
     return render(request, 'inscriptos_tabla.html', {'inscriptos': inscriptos, 'tipo_usuario': tipo_usuario })
 
 @staff_member_required
 def descargar_inscriptos(request):
     #Obtenemos todos los inscriptos
-    inscriptos = Inscriptos.objects.all().order_by('-apellido')
+    inscriptos = Inscripto.objects.all().order_by('-apellido')
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="listado_inscriptos.csv"'
     writer = csv.writer(response)

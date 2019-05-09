@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from tinymce.models import HTMLField
 #Agregar Modulos personales
 from bigdatajujuy.settings import MEDIA_URL
-from inscripciones.models import Inscriptos
+from inscripciones.models import Inscripto
 from calendario.models import Evento
 
 #Elementos del FAQ
@@ -17,8 +17,8 @@ class Faq(models.Model):
     def __str__(self):
         return self.pregunta
 
-class Conferencias(models.Model):
-    expositor = models.ForeignKey(Inscriptos, on_delete=models.CASCADE, related_name='conferencias')
+class Conferencia(models.Model):
+    expositor = models.ForeignKey(Inscripto, on_delete=models.CASCADE, related_name='conferencias')
     titulo = models.CharField('Titulo', max_length=200)
     descripcion = HTMLField()
     archivo = models.FileField('Archivo de Presentacion', storage=FileSystemStorage(location=MEDIA_URL), blank=True, null=True)

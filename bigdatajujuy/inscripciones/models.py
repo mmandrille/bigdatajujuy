@@ -21,7 +21,7 @@ DESTINO = (
     )
 
 # Create your models here.
-class Inscriptos(models.Model):
+class Inscripto(models.Model):
     categoria = models.IntegerField(choices=CATEGORIA, default=1)
     nombres = models.CharField('Nombres', max_length=50)
     apellido = models.CharField('Apellidos', max_length=50)

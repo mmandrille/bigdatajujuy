@@ -1,7 +1,7 @@
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import six
 #Import Personales
-from .models import Inscriptos
+from .models import Inscripto
 
 class TokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, inscripto, timestamp):
