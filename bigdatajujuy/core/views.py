@@ -24,7 +24,7 @@ def mostrar_exposiciones(request):
 
 def cargar_exposicion(request, inscripto_id, inscripto_dni):
     try:
-        inscripto = Inscriptos.objects.get(pk=inscripto_id, num_doc=inscripto_dni, autorizado=True, categoria=2) #Chequeamos si no esta inscripto y autorizado
+        inscripto = Inscriptos.objects.get(pk=inscripto_id, num_doc=inscripto_dni, categoria=2) #Chequeamos si no esta inscripto y autorizado
         if request.method == 'POST':
             print(inscripto)
             form = ConferenciaForm(request.POST)
