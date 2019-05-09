@@ -22,7 +22,8 @@ from .modelforms import InscriptoForm_asistente, InscriptoForm_expositor
 from .tokens import account_activation_token
 from .tasks import crear_mails, crear_progress_link
 
-def inscripcion(request, tipo):
+def inscripcion(request):
+    tipo = request.path[11:]
     if request.method == 'POST':#Si intenta inscribirse
         if tipo == 'expositor':#Cargamos el objecto form segun tipo de inscripcion
             form = InscriptoForm_expositor(request.POST)

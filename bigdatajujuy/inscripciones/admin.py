@@ -10,16 +10,12 @@ def enviar_mail(modeladmin, request, queryset):
     #Conseguimos la lista de destinatarios
     for obj in queryset:
         mail_list = list()
-        if obj.destinatarios == 0:
-            mail_list = [obj.autor.email]
-        elif obj.destinatarios == 1:
-            for u in User.objects.all(): mail_list.append(u.email)
-        elif obj.destinatarios == 2:
-            for u in Inscriptos.objects.all(): mail_list.append(u.email)
-        elif obj.destinatarios == 3:
-            for u in Mails.objects.filter(valido=True): mail_list.append(u.email)
-        elif obj.destinatarios == 4:
-            for u in Mails.objects.all(): mail_list.append(u.email)
+        cargar_destinatarios = [lambda:mail_list.append(obj.autor.email), 
+                                lambda:[mail_list.append(u.email) for u in User.objects.all()], 
+                                lambda:[mail_list.append(u.email) for u in Inscriptos.objects.all()],
+                                lambda:[mail_list.append(u.email) for u in Mails.objects.filter(valido=True)],
+                                lambda:[mail_list.append(u.email) for u in Mails.objects.all()]]
+        cargar_destinatarios[obj.destinatarios]()
         #empezamos a bulkear y creamos las background tasks!
         count = 0
         new_queue =  crear_progress_link(str("EnviarMails:"+str(obj.id)))
@@ -29,6 +25,19 @@ def enviar_mail(modeladmin, request, queryset):
         enviar_mails(msj_id=obj.id, lista_mails=mail_list[count:len(mail_list)], schedule=int(count/10), queue=new_queue)
         obj.enviado = True
         obj.save()
+
+def remove_from_fieldsets(fieldsets, fields):
+    for fieldset in fieldsets:
+        for field in fields:
+            if field in fieldset[1]['fields']:
+                new_fields = []
+                for new_field in fieldset[1]['fields']:
+                    if not new_field in fields:
+                        new_fields.append(new_field)
+                        
+                fieldset[1]['fields'] = tuple(new_fields)
+                break
+
 
 #Le damos mejores descripciones a las Acciones
 enviar_mail.short_description = "Comenzar el envio Masivo"
@@ -41,6 +50,10 @@ class MensajesAdmin(admin.ModelAdmin):
 
 class InscriptosAdmin(admin.ModelAdmin):
     list_filter = ['activo', 'categoria', 'autorizado']
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(InscriptosAdmin, self).get_fieldsets(request, obj)
+        if obj.categoria == 1: remove_from_fieldsets(fieldsets, ('autorizado',))
+        return fieldsets
 
 # Register your models here.
 admin.site.register(Inscriptos, InscriptosAdmin)
