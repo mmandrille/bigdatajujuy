@@ -3,7 +3,7 @@
     {% if prox_fecha %}
         <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("6 13, 2019 11:00:00").getTime();
+        var countDownDate = new Date("{{prox_fecha}}").getTime();//Se lo pasamos desde la DB
 
         // Update the count down every 1 second
         var x = setInterval(function() {
