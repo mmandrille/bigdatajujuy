@@ -9,8 +9,8 @@ def prox_evento():
     try: 
         evento = Evento.objects.filter(fecha_inicio__gte=timezone.now()).order_by('fecha_inicio').first()
         return evento.get_tipo_display(), evento.fecha_inicio
-    except Evento.DoesNotExist or AttributeError:
-        return "Sin Eventos(Hora Actual)", timezone.now()
+    except Evento.DoesNotExist: return "Sin Eventos(Hora Actual)", timezone.now()
+    except AttributeError: return "Sin Eventos(Hora Actual)", timezone.now()
 
 def duracion_congreso():
     try: 
@@ -19,6 +19,6 @@ def duracion_congreso():
             duracion = duracion.days + 1
         else: 
             duracion = duracion.days
-    except Evento.DoesNotExist or AttributeError: 
-        duracion = "0"
+    except Evento.DoesNotExist: duracion = "0"
+    except AttributeError: duracion = "0"
     return duracion
