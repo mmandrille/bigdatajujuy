@@ -1,4 +1,5 @@
 #Modulos Standard
+from datetime import date
 from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -19,7 +20,12 @@ def home(request):
                                          'texto_central': texto_central, })
 
 def mostrar_exposiciones(request):
-    conferencias = Conferencia.objects.filter(autorizada=True)
+    conferencias = Conferencia.objects.filter(autorizada=True).order_by('evento__fecha_inicio')
+    return render(request, 'conferencias.html', {'conferencias': conferencias, })
+
+def mostrar_exposiciones_diario(request, str_fecha):
+    fecha = date(int(str_fecha[:4]), int(str_fecha[4:6]), int(str_fecha[6:]))
+    conferencias = Conferencia.objects.filter(autorizada=True, evento__fecha_inicio__date=fecha).order_by('evento__fecha_inicio')
     return render(request, 'conferencias.html', {'conferencias': conferencias, })
 
 def cargar_exposicion(request, inscripto_id, inscripto_dni):
@@ -40,6 +46,11 @@ def cargar_exposicion(request, inscripto_id, inscripto_dni):
 
 def mostrar_expositores(request):
     expositores = Inscripto.objects.filter(categoria=2, autorizado=True)
+    return render(request, 'expositores.html', {'expositores': expositores, })
+
+def mostrar_expositores_diario(request, str_fecha):
+    fecha = date(int(str_fecha[:4]), int(str_fecha[4:6]), int(str_fecha[6:]))
+    expositores = Inscripto.objects.filter(categoria=2, autorizado=True, conferencias__evento__fecha_inicio__date=fecha)
     return render(request, 'expositores.html', {'expositores': expositores, })
 
 def contacto(request):

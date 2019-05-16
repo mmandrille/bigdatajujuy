@@ -1,8 +1,31 @@
 {% block content %}
     <li><a href="/">Inicio</a></li>
+    <li><a href="/">Novedades</a></li>
+    <li><a href="/calendario/">Programa</a>        
+        <ul class="submenu">
+            <li><a href="/calendario/20190613">Dia 1</a></li>
+            <li><a href="/calendario/20190614">Dia 2</a></li>
+            <li><a href="/calendario/20190615">Dia 3</a></li>
+        </ul>
+        <span class="triangle glyphicon glyphicon-triangle-bottom"></span>
+    </li>
+    <li class="desplegable"><a href="/conferencias/">Conferencias</a>
+            <ul class="submenu">
+            <li><a href="/conferencias/20190613">Dia 1</a></li>
+            <li><a href="/conferencias/20190614">Dia 2</a></li>
+            <li><a href="/conferencias/20190615">Dia 3</a></li>
+        </ul>
+        <span class="triangle glyphicon glyphicon-triangle-bottom"></span>
+    </li>
+    <li><a href="/expositores/">Expositores</a>
+            <ul class="submenu">
+            <li><a href="/expositores/20190613">Dia 1</a></li>
+            <li><a href="/expositores/20190614">Dia 2</a></li>
+            <li><a href="/expositores/20190615">Dia 3</a></li>
+        </ul>
+        <span class="triangle glyphicon glyphicon-triangle-bottom"></span>
+    </li>
     <li><a href="/faq/">¿Que es Jujuy BigData Summit?</a></li>
-    <li><a href="/calendario/">Programa</a></li>
-    <li><a href="/expositores/">Expositores</a></li>
-    <li><a href="/conferencias/">Conferencias</a></li>
+
     <li><a href="/contacto/">Contacto</a></li>
 {% endblock %}

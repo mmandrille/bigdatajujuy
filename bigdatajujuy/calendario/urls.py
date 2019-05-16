@@ -5,5 +5,6 @@ from . import views
 
 app_name = 'calendario'
 urlpatterns = [
-    url('', views.calendario, name='calendario'),
+    path('', views.calendario, name='calendario'),
+    path('<str:str_fecha>', views.calendario_diario, name='calendario_diario'),
 ]

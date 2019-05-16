@@ -486,6 +486,22 @@ menu .btn-default
     border: 4px solid #2b599d;
     border-radius: 12px;
 }
+
+.main_inscripcion>a>div.bttn_inscribite {
+    width: 30%;
+    height: 5em;
+    line-height: 3em;
+    font-size: large;
+    display: inline-block;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 12px;
+}
+
 .main_inscripcion>div.bttn_hide {
     width: 10%;
     height: 4em;
@@ -667,9 +683,9 @@ footer .col-md-4
 
 footer img.logo
 {
- margin: auto;
+    margin: auto;
     display: block;
-    width: 200px;
+    width: 250px;
     margin-top: 40px;
 }
 
@@ -717,25 +733,25 @@ footer .redes-sociales span:hover{
 
 footer .icon-facebook
 {
-    background: url(../img/facebook.png);
+    background: url(../img/icons/facebook.png);
     background-size: contain;
 }
 
 footer .icon-twitter
 {
-    background: url(../img/twitter.png);
+    background: url(../img/icons/twitter.png);
     background-size: contain;
 }
 
 footer .icon-youtube
 {
-    background: url(../img/youtube.png);
+    background: url(../img/icons/youtube.png);
     background-size: contain;
 }
 
 footer .icon-instagram
 {
-    background: url(../img/instagram.png);
+    background: url(../img/icons/instagram.png);
     background-size: contain;
 }
 

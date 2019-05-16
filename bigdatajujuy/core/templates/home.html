@@ -4,28 +4,28 @@
     <div class="main_icons">
         <div>
             <a href="/calendario/">
-                <img class="main_icon" src="{% static 'img/dias.png' %}" alt="">
+                <img class="main_icon" src="{% static 'img/icons/dias.png' %}" alt="">
                 <p class=numero>3</p>
                 <p class="texto">Dias</p>
             </a>
         </div>
         <div>
             <a href="/conferencias/">
-                <img class="main_icon" src="{% static 'img/conferencias.png' %}" alt="">
+                <img class="main_icon" src="{% static 'img/icons/conferencias.png' %}" alt="">
                 <p class=numero>{{cconferencias}}</p>
                 <p class="texto">Conferencias</p>
             </a>
         </div>
         <div>
             <a href="/expositores/">
-                <img class="main_icon" src="{% static 'img/speakers.png' %}" alt="">
+                <img class="main_icon" src="{% static 'img/icons/speakers.png' %}" alt="">
                 <p class=numero>{{cexpositores}}</p>
                 <p class="texto">Expositores</p>
             
         </div>
         <div>
             <a href="#">
-                <img class="main_icon" src="{% static 'img/visitantes.png' %}" alt="">
+                <img class="main_icon" src="{% static 'img/icons/visitantes.png' %}" alt="">
                 <p class=numero>{{casistentes}}</p>
                 <p class="texto">Asistentes</p>
             </a>
@@ -42,15 +42,22 @@
     
     <div class="main_inscripcion">
         <br>
-        <h1><b>INSCRIBITE</b></h1>
+        <a href="/inscribir/asistente">
+            <div class="bttn_inscribite">
+                <h1><b>INSCRIBITE</b></h1>
+            </div>
+        </a>
+        <!--
         <a href="/inscribir/expositor">
             <div class="bttn_exp"><b>EXPOSITOR</b></div>
         </a>
+        
         <div class="bttn_hide"></div>
         <a href="/inscribir/asistente">
             <div class="bttn_ade"><b>ASISTENTE</b></div>
         </a>
-        <br><br><br>
+        -->
+        <br><br>
     </div>
 {% endblock %}
 
