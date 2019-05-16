@@ -34,7 +34,7 @@ def remove_from_fieldsets(fieldsets, fields):
                 for new_field in fieldset[1]['fields']:
                     if not new_field in fields:
                         new_fields.append(new_field)
-                        
+
                 fieldset[1]['fields'] = tuple(new_fields)
                 break
 
@@ -52,7 +52,7 @@ class InscriptoAdmin(admin.ModelAdmin):
     list_filter = ['activo', 'categoria', 'autorizado']
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(InscriptoAdmin, self).get_fieldsets(request, obj)
-        if obj.categoria == 1: remove_from_fieldsets(fieldsets, ('autorizado',))
+        if obj.categoria == 1: remove_from_fieldsets(fieldsets, ('autorizado','descripcion','foto', ))
         return fieldsets
 
 # Register your models here.
