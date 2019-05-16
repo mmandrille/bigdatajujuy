@@ -418,14 +418,76 @@ menu .btn-default
 }
 /*BEGIN MAIN */
 /* BOTONES*/
+.main_clock {
+    text-align: center;
+    font-weight:bold;
+    text-align: center;
+    width:100%;
+    height: 12em;
+    background-color:#2b599d;
+
+}
+.main_clock>p {
+    color: white;
+    font: bold;
+    font-size: 3em;
+    width: 100%;
+}
+.main_clock>div {
+    width: 10%;
+    display: inline-block;
+}
+.main_clock>div>p {
+    color: white;
+    font: bold;
+    text-align: center;
+    font-size: 1,5em;
+}
+.main_clock>span {
+    width: 100%;
+}
+
+.main_clock>b>div.dias {
+
+}
+.main_clock>b>div.horas {
+
+}
+.main_clock>b>div.minutos {
+
+}
+
+.main_clock>div>div.numero {
+    width: 70%;
+    margin: 0 auto;
+    font-size: 2em;
+    background-color: white;
+    border-style: solid;
+    border-width: medium;
+    border-color: #244d8b;
+    color: #244d8b;
+}
+
+.main_clock>div>div.numero_doble {
+    width: 45%;
+    font-size: 2em;
+    background-color: white;
+    border-style: solid;
+    border-width: medium;
+    border-color: #244d8b;
+    color: #244d8b;
+    display: inline-block;
+}
+
+/* MAIN ICONS */
 .main_icons {
     text-align: center;
     vertical-align: middle;
     width:100%;
-    background-color:#2b599d;
+
 }
 .main_icons>div {
-    width: 22%;
+    width: 20%;
     display: inline-block;
     color: white;
     margin-top: 20px;
@@ -436,25 +498,28 @@ menu .btn-default
     display: inline-block;
 }
 .main_icons>div>a{
-    color: white;
+    color: black;
 }
 .main_icons>div>a>p.numero{
     margin: 0;
-    color: white;
+    color: black;
     font-size: 2em;
 }
 .main_icons>div>a>p.texto{
     margin: 0;
-    color: white;
-    font-size: 1em;
+    color: black;
+    font-size: 1,5em;
 }
 .main_icon{
-    width: 35%
+    filter: invert(75%);
+    vertical-align: middle;
+    max-width: 20%;
+    max-height: 15%;
    }
 
 /*INFO*/
 .main_info{
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: 2em;
 }
 .main_info_txt{
@@ -470,11 +535,7 @@ menu .btn-default
     width:100%;
     background-color:black;
 }
-.main_inscripcion>h1 {
 
-    margin-top: 10px;
-    color: white;
-}
 .main_inscripcion>a>div.bttn_exp {
     width: 30%;
     height: 4em;
@@ -586,7 +647,7 @@ menu .btn-default
 footer
 {
    font-family: Archia;
-   background: #fc1955;
+   background: white;
    position: absolute;
    bottom: 0;
    width: 100%;
@@ -595,7 +656,6 @@ footer
 
 .footer-top
 {
-    background: url(../img/silueta_footer.png);
     height: 150px;
     background-repeat: repeat-x;
     background-size: 850px;
@@ -875,11 +935,6 @@ footer h5{
 body.transparencia #slider-overlay
 {
     background-position-y: 145px;
-}
-
-body.transparencia h1
-{
-    margin-top: 20px;
 }
 
 .seccion-transparencia

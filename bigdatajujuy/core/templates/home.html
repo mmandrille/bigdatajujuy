@@ -1,33 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    {% include "reloj.html" %}
+    
     <div class="main_icons">
         <div>
             <a href="/calendario/">
                 <img class="main_icon" src="{% static 'img/icons/dias.png' %}" alt="">
-                <p class=numero>3</p>
-                <p class="texto">Dias</p>
+                <p class=numero>{{duracion}} Dias</p>
             </a>
         </div>
         <div>
             <a href="/conferencias/">
                 <img class="main_icon" src="{% static 'img/icons/conferencias.png' %}" alt="">
-                <p class=numero>{{cconferencias}}</p>
-                <p class="texto">Conferencias</p>
+                <p class=numero>{{cconferencias}} Conferencias</p>
             </a>
         </div>
         <div>
             <a href="/expositores/">
                 <img class="main_icon" src="{% static 'img/icons/speakers.png' %}" alt="">
-                <p class=numero>{{cexpositores}}</p>
-                <p class="texto">Expositores</p>
-            
+                <p class=numero>{{cexpositores}} Expositores</p>            
         </div>
         <div>
             <a href="#">
                 <img class="main_icon" src="{% static 'img/icons/visitantes.png' %}" alt="">
-                <p class=numero>{{casistentes}}</p>
-                <p class="texto">Asistentes</p>
+                <p class=numero>{{casistentes}} Asistentes</p>
             </a>
         </div>
         <span></span>
@@ -36,12 +33,11 @@
     <div class="main_info">
         <div class="main_info_txt">
             {{ texto_central.respuesta | safe}}
+            <br>
         </div>
     </div>
 
-    
     <div class="main_inscripcion">
-        <br>
         <a href="/inscribir/asistente">
             <div class="bttn_inscribite">
                 <h1><b>INSCRIBITE</b></h1>

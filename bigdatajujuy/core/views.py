@@ -10,14 +10,29 @@ from django.shortcuts import render, redirect
 from .models import Faq, Conferencia
 from .modelforms import ConferenciaForm
 from inscripciones.models import Inscripto
+from calendario.functions import prox_evento
+from calendario.models import Evento
 
 def home(request):
+    try: 
+        duracion = Evento.objects.get(tipo=2).fecha_inicio - Evento.objects.get(tipo=1).fecha_inicio
+        if duracion.seconds > 0:
+            duracion = duracion.days + 1
+        else: duracion = duracion.days
+    except Evento.DoesNotExist: 
+        duracion = "0"
     casistentes = Inscripto.objects.filter(activo=True, categoria=1).count()
+    if casistentes < 100: casistentes=100
     cexpositores = Inscripto.objects.filter(autorizado=True, categoria=2).count()
+    if cexpositores < 20: cexpositores=20
     cconferencias = Conferencia.objects.filter(autorizada=True).count()
+    if cconferencias < 20: cconferencias=20
     texto_central = Faq.objects.filter().first()
-    return render(request, 'home.html', {'casistentes': casistentes, 'cexpositores': cexpositores, 'cconferencias': cconferencias,
-                                         'texto_central': texto_central, })
+    prox_fecha = prox_evento()
+    return render(request, 'home.html', {'duracion': duracion,
+                                         'casistentes': casistentes, 'cexpositores': cexpositores, 'cconferencias': cconferencias,
+                                         'texto_central': texto_central,
+                                         'prox_fecha': prox_fecha, })
 
 def mostrar_exposiciones(request):
     conferencias = Conferencia.objects.filter(autorizada=True).order_by('evento__fecha_inicio')

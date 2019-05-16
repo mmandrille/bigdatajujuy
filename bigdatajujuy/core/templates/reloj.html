@@ -1,0 +1,23 @@
+{% block content %}
+    {% if prox_fecha %}
+        <div class="main_clock">
+            <p>FALTAN</p>
+            <div class="dias">
+                <div id="dias" class="numero"></div>
+                <p>Dias</p>
+            </div>
+            <!--<div class="relleno"></div>-->
+            <div class="horas">
+                <div id="horas" class="numero"></div>
+                <p>Horas</p>
+            </div>
+            <!--<div class="relleno"></div>-->
+            <div class="minutos">
+                <div id="minutos" class="numero_doble"></div>
+                <div id="segundos" class="numero_doble"></div>
+                <p>Minutos</p>
+            </div>
+            <span></span>
+        </div>
+    {% endif %}
+{% endblock %}
